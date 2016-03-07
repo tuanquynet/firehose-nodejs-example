@@ -2,13 +2,7 @@
 
 const AWS      = require('aws-sdk');
 const firehose = new AWS.Firehose({region : 'us-west-2'});
-
-function env(name){
-  if( ! (name in process.env) )
-    throw new Error(`'${name}' not found in process.env`);
-
-  return process.env[name];
-}
+const env      = require('./env.js');
 
 function createDeliveryStream(dStreamName, callback) {
 

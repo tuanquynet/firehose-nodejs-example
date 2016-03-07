@@ -2,13 +2,7 @@
 
 const AWS = require('aws-sdk');
 const S3  = new AWS.S3({region : 'us-west-2'});
-
-function env(name){
-  if( ! (name in process.env) )
-    throw new Error(`'${name}' not found in process.env`);
-
-  return process.env[name];
-}
+const env = require('./env.js');
 
 function checkIfBucketExists(bucketName, callback) {
   S3.listBuckets(function(err, buckets){
@@ -24,11 +18,10 @@ function checkIfBucketExists(bucketName, callback) {
 }
 
 function createBucketIfItDoesNotExist(bucketName, callback) {
-  const region = _region || 'us-west-2';
   const s3_config = {
     Bucket: 'firehose-nodejs-example', 
     CreateBucketConfiguration: {
-      LocationConstraint: 'us-west-2'
+      LocationConstraint: env('AWS_REGION')
     }
   };
 

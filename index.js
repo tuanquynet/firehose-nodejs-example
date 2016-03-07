@@ -5,16 +5,30 @@ require('dotenv').load();
 
 const myFirehose  = require('./my-firehose.js');
 const myRedshift  = require('./my-redshift.js');
-const dStreamName = 'test_firehose2';
+const myS3        = require('./my-s3.js');
+const env         = require('./env.js');
 
+const dStreamName = 'test_firehose_' + ~~(Math.random() * 10000);
 
-  createRedshiftTable          (
+  createS3Bucket               (
+  createRedshiftTable          .bind(null,
   createDeliveryStream         .bind(null,
   waitForDStreamToBecomeActive .bind(null,
   sendOneRecordToFirehose      .bind(null,
   queryRedshiftTableEvery1min  )
-  )));
+  ))));
 
+
+function createS3Bucket(callback){
+  const bucketName = env('S3BUCKET_NAME');
+  console.log('createS3Bucket', bucketName);
+
+  myS3.createBucketIfItDoesNotExist(bucketName, function(err, res){
+    if(err) throw new Error(err);
+
+    callback(null, res);
+  });
+}
 
 function createRedshiftTable(callback){
   console.log('createRedshiftTable');
