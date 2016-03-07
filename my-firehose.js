@@ -48,6 +48,7 @@ function createDeliveryStream(dStreamName, callback) {
       // S3DestinationConfiguration: s3config
     };
 
+  console.log('redshift_config', JSON.stringify(redshift_config, null, ' '));
   // Create the new stream if it does not already exist.
   firehose.createDeliveryStream(redshift_config, function (err, data) {
     if (err) 

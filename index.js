@@ -82,12 +82,12 @@ function sendOneRecordToFirehose(callback){
 }
 
 function queryRedshiftTableEvery1min(){
-  console.log('queryRedshiftTableEvery1min');
+  console.log('\nqueryRedshiftTableEvery1min', new Date());
 
   myRedshift.selectAllFrom(dStreamName, function(err, res){
     if(err) throw new Error(err);
 
-    console.log(res);
+    console.log('rows', res.rows);
     setTimeout(queryRedshiftTableEvery1min, 60000, dStreamName);
   });
 }
