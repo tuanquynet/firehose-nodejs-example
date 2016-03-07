@@ -1,0 +1,24 @@
+{
+  "name": "firehose-nodejs-example",
+  "version": "0.0.1",
+  "description": "Creation of Amazon Kinesis Firehose Delivery Stream example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielsan/firehose-nodejs-example.git"
+  },
+  "keywords": [
+    "aws",
+    "firehose",
+    "amazon"
+  ],
+  "author": "Daniel Santana <me@danielsantana.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielsan/firehose-nodejs-example/issues"
+  },
+  "homepage": "https://github.com/danielsan/firehose-nodejs-example#readme"
+}
