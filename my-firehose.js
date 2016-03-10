@@ -4,6 +4,9 @@ const AWS      = require('aws-sdk');
 const firehose = new AWS.Firehose({region : 'us-west-2'});
 const env      = require('./env.js');
 
+AWS.config.logger = process.stdout;
+// AWS.config.logger = console;
+
 function createDeliveryStream(dStreamName, callback) {
 
   const REDSHIFT_JDBCURL='jdbc:redshift://' + env('REDSHIFT_HOST') + ':' + env('REDSHIFT_PORT') + '/' + env('REDSHIFT_DB');
@@ -42,7 +45,8 @@ function createDeliveryStream(dStreamName, callback) {
         // http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-firehose
         // arn:aws:firehose:region:account-id:deliverystream/delivery-stream-name
         // RoleARN: `arn:aws:firehose:${env('AWS_REGION')}:${env('AWS_ACCOUNT_ID')}:cluster:${env('REDSHIFT_CLUSTER_NAME')}`, /* required */
-        RoleARN: `arn:aws:iam::${env('AWS_ACCOUNT_ID')}:role:firehose_delivery_role`, /* required */
+        // RoleARN: `arn:aws:iam::${env('AWS_ACCOUNT_ID')}:role:firehose_delivery_role`, /* required */
+        RoleARN: s3config.RoleARN,
         S3Configuration: s3config,
       },
       // S3DestinationConfiguration: s3config
@@ -51,7 +55,7 @@ function createDeliveryStream(dStreamName, callback) {
   console.log('redshift_config', JSON.stringify(redshift_config, null, ' '));
   // Create the new stream if it does not already exist.
   firehose.createDeliveryStream(redshift_config, function (err, data) {
-    if (err) 
+    if (err)
       return callback(err); // an error occurred
 
     callback(null, data);   // successful response
