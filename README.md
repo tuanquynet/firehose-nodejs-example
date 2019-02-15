@@ -30,9 +30,8 @@ Simply clone the repo and install the modules using npm
     * You can go to the [Cluster Connection URL](https://console.aws.amazon.com/redshift/home#cluster-connection:) to download the JDBC driver for Redshift and to see your JDBC Connection String as well.
     * Be sure to allow your ip address on redshift security settings
     * You'll also have to allow the Firehose servers of your region to access your Redshift Cluster.
-6.
-7. Copy the [.env-dist](.env-dist) file to a file named .env
-8. Edit your .env file and set the variables with your AWS, S3 and Redshift information.
+5. Copy the [.env-dist](.env-dist) file to a file named .env
+6. Edit your .env file and set the variables with your AWS, S3 and Redshift information.
 
 ## Running
 Once you have followed all the steps above you can run the project by following the npm pattern
